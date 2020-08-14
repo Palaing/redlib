@@ -49,4 +49,4 @@ build-csv: func [		"builds csv from a block of (lines == blocks of items)"
 
 ; test: {o;"";;^/"nom2";prénom2;"""this"" and that"^/"nom3";prénom3;"email3;^/and ""something"" else"}
 ; probe res: parse-csv test
-; probe build-csv res
+; probe build-csv res 
