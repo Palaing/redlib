@@ -7,4 +7,4 @@ This repository includes:
   * remap.red: various iteration functions traversing one or two series
   * parse-csv.red: convert csv file to and from Red nested blocks format; written before csv parsing was included in Red, I still use it
   * view-table.red: rudimentary table viewer and editor for csv-like data
-* games / scripts written for fun or to contribute to promoting Red on http://rosettacode.org: see /games
+* [[games|https://github.com/Palaing/redlib/tree/master/games]] / scripts written for fun or to contribute to promoting Red on http://rosettacode.org
