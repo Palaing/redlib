@@ -11,9 +11,9 @@ foreach t trits [set t to-lit-word t]
 		; utility function to test if a word is a trit
 trit?: function [t] [not none? find trits t]
 
-		; ------ (prefix) operators ------
+		; ------ prefix operators ------
 		; unary operator
-tnot: function [a][
+tnot: !: function [a][
 	select [oui non oui bof bof] a
 ]
 		; binary (prefix) operators
@@ -34,32 +34,11 @@ teq: function [a b][
 	either any [a = bof b = bof][bof][
 		either a = b [oui][non]
 ]]
-		; ------ parsing (infix) operators ------
-; infix operators can only be defined in Red/System, requiring compilation
-; to emulate them in Red, we use a parsing function which transforms 
-; an expression rewriting in prefix form the following infix operators:
-; "&" (tand), "|" (tor), "=>" (timp), "<=>" (teq)
-; precedence is: parentheses, then "-" (tnot), then other operators
-
-tparse: function [ternary] [
-				; basic parsing items
-	letter: complement charset "-&|<=>()"
-	name: [some letter]
-	binop: [#"&" | #"|" | "=>" | "<=>" | "="]
-				; correspondence between infix and prefix operators
-	ops: ["&" "tand" "|" "tor" "=>" "timp" "<=>" "teq"]
-				; parsing rules that do not change input
-	term1: [opt #"-" ["(" expr1 ")" | name]]
-	expr1: [any [term1 binop] term1]
-				; parsing rules that do change input
-	term: [opt [#"-" keep ("tnot")] [keep "(" expr keep ")" | keep name]]
-	expr: [any [copy t term1 copy o binop keep (rejoin[
-		select ops o " " parse t [collect [term]]])] term]
-				; parse and rewrite ternary expression
-	form parse trim/all ternary [collect [expr]]
-]
-		; parse and then evaluate a ternary expression 
-teval: function [ternary] [do tparse ternary]
+		; ------ infix operators ------
+&:   make op! :tand
+|:   make op! :tor
+=>:  make op! :timp
+<=>: make op! :teq
 
 		; some examples
 probe init: [
@@ -67,7 +46,9 @@ a: oui
 b: bof
 c: non]
 do init
-foreach s ["-(-a)" "a&b" "a|(b&(oui|non))" "-((a|b)|b&c)" "(a&b)|c"][
-	res: tparse s
-	print rejoin [pad s 18 pad res 35 " " do res]
+
+foreach s [[! (! a)] [a & b] [a | (b & (oui | non))] 
+		[! ((a | b) | b & c)] [(a & b) | c]][
+	print rejoin [pad mold s 25 " " do s]
 ]
+	
