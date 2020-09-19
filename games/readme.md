@@ -6,5 +6,6 @@ A few games written in Red, esp. to contribute to http://rosettacode.org
 * fractran.red is a demo implementation of the FRACTRAN programming language of John Conway, see http://rosettacode.org/wiki/Fractran.
 * afterc.red challenges the rule "I before E except after C" of English language, see http://rosettacode.org/wiki/I_before_E_except_after_C; it tests the rule on 2 word lists, unixdict.txt and 1_2_all_freq.txt. The first one can be read directly from the web. The second was downloaded and manually converted from ANSI to UTF-8, as the /as refinement of Red's *read* action is not yet implemented.
 * fractaltree.red draws a fractal tree according to http://rosettacode.org/wiki/Fractal_tree - with some color, size and angle variations to improve visual effect.
+* some other scripts which are also on http://rosettacode.org...
 
 Writing both 24game.red and bof.red challenged me about parsing and evaluating arithmetic expressions with or without parentheses. I report this experience and learnings in the wiki.
